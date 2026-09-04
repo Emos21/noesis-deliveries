@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salon Price List</title>
+<style>
+  :root {
+    --ink: #1c1a18;
+    --muted: #6f6a64;
+    --line: #e7e2db;
+    --bg: #faf8f5;
+    --card: #ffffff;
+    --accent: #b07d3c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    padding: 20px 16px 40px;
+  }
+  .sheet {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  header h1 {
+    font-size: 26px;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 6px;
+  }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 18px 6px;
+    margin-bottom: 16px;
+  }
+  .section h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+  .item:first-of-type { border-top: none; }
+  .item .name { font-size: 16px; }
+  .item .note {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .item .price {
+    font-size: 16px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 24px;
+  }
+  footer strong { color: var(--ink); }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <header>
+      <h1>Salon Price List</h1>
+      <p>Kasarani &middot; Prices in Kenyan Shillings (KES)</p>
+    </header>
+
+    <section class="section">
+      <h2>Cuts</h2>
+      <div class="item">
+        <span class="name">Men's haircut<span class="note">Wash and finish included</span></span>
+        <span class="price">KES 300</span>
+      </div>
+      <div class="item">
+        <span class="name">Children's haircut<span class="note">Under 12 years</span></span>
+        <span class="price">KES 200</span>
+      </div>
+      <div class="item">
+        <span class="name">Ladies' trim and shape</span>
+        <span class="price">KES 400</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Braids</h2>
+      <div class="item">
+        <span class="name">Box braids<span class="note">Small to medium</span></span>
+        <span class="price">KES 1,500</span>
+      </div>
+      <div class="item">
+        <span class="name">Cornrows / lines<span class="note">Plain, per style</span></span>
+        <span class="price">KES 500</span>
+      </div>
+      <div class="item">
+        <span class="name">Knotless braids</span>
+        <span class="price">KES 2,000</span>
+      </div>
+      <div class="item">
+        <span class="name">Twists</span>
+        <span class="price">KES 1,200</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Wash and Blow Dry</h2>
+      <div class="item">
+        <span class="name">Wash and blow dry</span>
+        <span class="price">KES 500</span>
+      </div>
+      <div class="item">
+        <span class="name">Wash, blow dry and style</span>
+        <span class="price">KES 700</span>
+      </div>
+      <div class="item">
+        <span class="name">Deep conditioning treatment<span class="note">Add on</span></span>
+        <span class="price">KES 300</span>
+      </div>
+    </section>
+
+    <footer>
+      <p><strong>Walk in or book ahead.</strong><br>Prices may vary with hair length and extensions used.</p>
+    </footer>
+  </div>
+</body>
+</html>
