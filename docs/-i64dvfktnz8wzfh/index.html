@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tyre Sales - Daily Log</title>
+<style>
+  :root {
+    --ink: #1c1f24;
+    --muted: #5f6b7a;
+    --line: #e2e6ec;
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --accent: #1f6feb;
+    --accent-dark: #1656b8;
+    --total-bg: #eef4ff;
+    --danger: #b23b3b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+  }
+  header h1 {
+    font-size: 1.5rem;
+    margin: 0 0 4px;
+  }
+  header p {
+    margin: 0 0 20px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .day-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .day-row label {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  input, select {
+    font: inherit;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    width: 100%;
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(31,111,235,0.15);
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+  .card h2 {
+    font-size: 1rem;
+    margin: 0 0 14px;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .actions {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+  }
+  button {
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 18px;
+  }
+  .btn-add {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-add:hover { background: var(--accent-dark); }
+  .btn-clear {
+    background: transparent;
+    color: var(--danger);
+    border: 1px solid var(--line);
+  }
+  .btn-clear:hover { border-color: var(--danger); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 11px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  td.price, th.price { text-align: right; white-space: nowrap; }
+  .row-del {
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .empty {
+    color: var(--muted);
+    text-align: center;
+    padding: 26px 10px;
+    font-style: italic;
+  }
+  .total-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background: var(--total-bg);
+    border: 1px solid #d3e2ff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 4px;
+  }
+  .total-bar .label {
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .total-bar .amount {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+  .total-bar .count {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-align: right;
+  }
+  @media (max-width: 760px) {
+    .form-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 460px) {
+    .form-grid { grid-template-columns: 1fr; }
+    th.hide-sm, td.hide-sm { display: none; }
+    .total-bar .amount { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Tyre Sales</h1>
+    <p>Write down each tyre as it goes out. The day's takings add up at the bottom.</p>
+  </header>
+
+  <div class="day-row">
+    <label for="day">Day</label>
+    <input type="date" id="day" style="width:auto">
+  </div>
+
+  <div class="card">
+    <h2>Add a tyre</h2>
+    <div class="form-grid">
+      <div class="field">
+        <label for="size">Tyre size</label>
+        <input type="text" id="size" placeholder="e.g. 195/65 R15" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="rim">Rim</label>
+        <input type="text" id="rim" placeholder="e.g. 15 inch" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="price">Sold for (KSh)</label>
+        <input type="number" id="price" placeholder="0" min="0" step="1" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label for="mechanic">Mechanic who fitted</label>
+        <input type="text" id="mechanic" placeholder="Name" autocomplete="off">
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn-add" id="addBtn">Add tyre</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Size</th>
+          <th class="hide-sm">Rim</th>
+          <th class="hide-sm">Mechanic</th>
+          <th class="price">Sold for</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div class="total-bar">
+    <span class="label">Day's takings</span>
+    <div>
+      <span class="amount" id="total">KSh 0</span>
+      <span class="count" id="count">0 tyres</span>
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:16px">
+    <button class="btn-clear" id="clearBtn">Clear this day</button>
+  </div>
+</div>
+
+<script>
+  var STORAGE_KEY = "tyre-sales-log-v1";
+  var dayInput = document.getElementById("day");
+  var rowsBody = document.getElementById("rows");
+  var totalEl = document.getElementById("total");
+  var countEl = document.getElementById("count");
+
+  // Local date as YYYY-MM-DD (not UTC, so the day is the shop's day).
+  function today() {
+    var d = new Date();
+    var m = String(d.getMonth() + 1).padStart(2, "0");
+    var day = String(d.getDate()).padStart(2, "0");
+    return d.getFullYear() + "-" + m + "-" + day;
+  }
+
+  function loadAll() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveAll(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function entriesForDay() {
+    var all = loadAll();
+    return all[dayInput.value] || [];
+  }
+
+  function setEntriesForDay(list) {
+    var all = loadAll();
+    all[dayInput.value] = list;
+    saveAll(all);
+  }
+
+  function money(n) {
+    return "KSh " + Number(n || 0).toLocaleString("en-KE");
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function render() {
+    var list = entriesForDay();
+    rowsBody.innerHTML = "";
+    var total = 0;
+
+    if (list.length === 0) {
+      var tr = document.createElement("tr");
+      tr.innerHTML = '<td colspan="5" class="empty">No tyres logged for this day yet.</td>';
+      rowsBody.appendChild(tr);
+    } else {
+      list.forEach(function (item, i) {
+        total += Number(item.price || 0);
+        var tr = document.createElement("tr");
+        tr.innerHTML =
+          "<td>" + escapeHtml(item.size || "-") + "</td>" +
+          '<td class="hide-sm">' + escapeHtml(item.rim || "-") + "</td>" +
+          '<td class="hide-sm">' + escapeHtml(item.mechanic || "-") + "</td>" +
+          '<td class="price">' + money(item.price) + "</td>" +
+          '<td><button class="row-del" data-i="' + i + '" title="Remove">&times;</button></td>';
+        rowsBody.appendChild(tr);
+      });
+    }
+
+    totalEl.textContent = money(total);
+    countEl.textContent = list.length + (list.length === 1 ? " tyre" : " tyres");
+  }
+
+  function addEntry() {
+    var size = document.getElementById("size");
+    var rim = document.getElementById("rim");
+    var price = document.getElementById("price");
+    var mechanic = document.getElementById("mechanic");
+
+    var priceVal = parseFloat(price.value);
+    if (!size.value.trim() && isNaN(priceVal)) {
+      size.focus();
+      return;
+    }
+
+    var list = entriesForDay();
+    list.push({
+      size: size.value.trim(),
+      rim: rim.value.trim(),
+      price: isNaN(priceVal) ? 0 : priceVal,
+      mechanic: mechanic.value.trim()
+    });
+    setEntriesForDay(list);
+
+    size.value = "";
+    rim.value = "";
+    price.value = "";
+    mechanic.value = "";
+    size.focus();
+    render();
+  }
+
+  rowsBody.addEventListener("click", function (e) {
+    var btn = e.target.closest(".row-del");
+    if (!btn) return;
+    var i = parseInt(btn.getAttribute("data-i"), 10);
+    var list = entriesForDay();
+    list.splice(i, 1);
+    setEntriesForDay(list);
+    render();
+  });
+
+  document.getElementById("addBtn").addEventListener("click", addEntry);
+
+  // Enter key anywhere in the form adds the tyre.
+  document.querySelectorAll(".form-grid input").forEach(function (inp) {
+    inp.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); addEntry(); }
+    });
+  });
+
+  document.getElementById("clearBtn").addEventListener("click", function () {
+    if (entriesForDay().length === 0) return;
+    if (confirm("Clear all tyres logged for this day?")) {
+      setEntriesForDay([]);
+      render();
+    }
+  });
+
+  dayInput.addEventListener("change", render);
+
+  dayInput.value = today();
+  render();
+</script>
+</body>
+</html>
