@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Njeri Mtumba, Githurai - Price List</title>
+  <meta name="description" content="Price list for Njeri's mtumba clothes in Githurai.">
+  <style>
+    :root {
+      --ink: #1b1714;
+      --muted: #6b6058;
+      --clay: #a8452b;
+      --line: #e6ded7;
+      --card: #ffffff;
+      --bg: #faf7f4;
+      --notice-bg: #fdf3e6;
+      --notice-line: #e6c893;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+      -webkit-text-size-adjust: 100%;
+      padding: 24px 16px 48px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    header { text-align: center; margin-bottom: 20px; }
+
+    header h1 {
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: -0.4px;
+    }
+
+    header .where {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+
+    header .tagline {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* ============================================================
+       EXAMPLE PRICES NOTICE
+       Delete this whole <div class="notice"> block (down to its
+       closing </div>) once you have put in your own real prices.
+       ============================================================ */
+    .notice {
+      background: var(--notice-bg);
+      border: 1px solid var(--notice-line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: #6b4b16;
+    }
+
+    .notice strong { display: block; margin-bottom: 2px; color: #4d360f; }
+
+    section { margin-bottom: 26px; }
+
+    h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    ul { list-style: none; }
+
+    li {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .name { font-size: 17px; font-weight: 600; }
+
+    .note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .price {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--clay);
+      white-space: nowrap;
+    }
+
+    .price .cur {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.4px;
+    }
+
+    footer {
+      border-top: 2px solid var(--line);
+      padding-top: 18px;
+      font-size: 15px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer .call {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    footer a { color: var(--clay); font-weight: 600; }
+
+    footer p + p { margin-top: 6px; }
+
+    @media (min-width: 768px) {
+      body { padding-top: 44px; }
+      header h1 { font-size: 36px; }
+    }
+
+    @media print {
+      body { background: #fff; max-width: none; padding: 0; }
+      .notice { display: none; }
+      li { break-inside: avoid; border-color: #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <!-- Change the shop name here if you want something different. -->
+    <h1>Njeri Mtumba</h1>
+    <span class="where">Githurai</span>
+    <p class="tagline">Good second hand clothes at fair prices.</p>
+  </header>
+
+  <!-- ============================================================
+       EXAMPLE PRICES NOTICE
+       Delete this whole block once your real prices are in.
+       ============================================================ -->
+  <div class="notice">
+    <strong>These prices are examples only.</strong>
+    They were put here to show how the page looks. Replace every price with
+    your own before you share this page, then delete this box.
+  </div>
+  <!-- ===== end of notice block ===== -->
+
+  <section>
+    <h2>Women</h2>
+    <ul>
+      <li>
+        <div>
+          <div class="name">Dresses</div>
+          <div class="note">Grade one</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 300</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Tops and blouses</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 200</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Jeans</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 350</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Skirts</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 250</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Sweaters and hoodies</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 400</div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Men</h2>
+    <ul>
+      <li>
+        <div>
+          <div class="name">Shirts</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 250</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">T shirts</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 200</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Jeans</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 400</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Trousers</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 350</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Jackets</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 600</div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Kids</h2>
+    <ul>
+      <li>
+        <div>
+          <div class="name">Tops</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 100</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Trousers and shorts</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 150</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Dresses</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 150</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Baby sets</div>
+          <div class="note">Two pieces</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 250</div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Shoes</h2>
+    <ul>
+      <li>
+        <div>
+          <div class="name">Ladies shoes</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 500</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Mens shoes</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 600</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Kids shoes</div>
+        </div>
+        <div class="price"><span class="cur">KSh</span> 250</div>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <!-- Put your real phone number in both places on the next line. -->
+    <span class="call">Call or WhatsApp <a href="tel:+254700000000">0700 000 000</a></span>
+    <p>Githurai. Open Monday to Saturday.</p>
+    <p>Prices can change when new bales come in. Ask for today's price.</p>
+  </footer>
+
+</body>
+</html>
