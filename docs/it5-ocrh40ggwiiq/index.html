@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mboga Fresh - Bei</title>
+  <style>
+    :root {
+      --green: #2e7d32;
+      --green-dark: #1b5e20;
+      --ink: #1a1a1a;
+      --muted: #5c6b5c;
+      --line: #e2e8e2;
+      --card: #ffffff;
+      --bg: #f4f8f4;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+      padding: 20px 16px 40px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: var(--green-dark);
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-top: 4px;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .item .name {
+      font-size: 19px;
+      font-weight: 600;
+    }
+
+    .item .sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .item .price {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--green);
+      white-space: nowrap;
+    }
+
+    .item .price span {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    footer strong { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mboga Fresh</h1>
+    <p>Mboga safi, bei poa. Karibu.</p>
+  </header>
+
+  <div class="list">
+    <div class="item">
+      <div>
+        <div class="name">Sukuma wiki</div>
+        <div class="sub">Kila kifungo</div>
+      </div>
+      <div class="price">20 <span>KSh</span></div>
+    </div>
+
+    <div class="item">
+      <div>
+        <div class="name">Spinach</div>
+        <div class="sub">Kila kifungo</div>
+      </div>
+      <div class="price">30 <span>KSh</span></div>
+    </div>
+
+    <div class="item">
+      <div>
+        <div class="name">Nyanya</div>
+        <div class="sub">Lundo tatu</div>
+      </div>
+      <div class="price">50 <span>KSh</span></div>
+    </div>
+
+    <div class="item">
+      <div>
+        <div class="name">Dhania</div>
+        <div class="sub">Kila kifungo</div>
+      </div>
+      <div class="price">10 <span>KSh</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <p><strong>Wairimu</strong> - pale stage</p>
+    <p>Ukitaka kubadilisha bei, niambie tu.</p>
+  </footer>
+</body>
+</html>
