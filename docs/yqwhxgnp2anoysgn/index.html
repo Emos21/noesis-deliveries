@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Otieno Boda Deliveries - Charges by Area</title>
+  <style>
+    :root {
+      --ink: #1c1c1e;
+      --muted: #6b6b70;
+      --line: #e6e6e9;
+      --bg: #ffffff;
+      --panel: #f7f7f8;
+      --accent: #1a7f4b;
+      --accent-soft: #e7f4ec;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 24px 18px 56px;
+    }
+    header { margin-bottom: 22px; }
+    .brand {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin: 0 0 6px;
+    }
+    h1 {
+      font-size: 26px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0;
+    }
+    .search {
+      margin: 22px 0 14px;
+    }
+    .search input {
+      width: 100%;
+      padding: 13px 15px;
+      font-size: 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      color: var(--ink);
+      outline: none;
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      background: #fff;
+    }
+    .list {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .row:last-child { border-bottom: none; }
+    .row .area { font-weight: 600; font-size: 16px; }
+    .row .note { display: block; color: var(--muted); font-weight: 400; font-size: 13px; margin-top: 2px; }
+    .row .price {
+      white-space: nowrap;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 5px 11px;
+      border-radius: 999px;
+    }
+    .empty {
+      padding: 22px 16px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 15px;
+    }
+    .terms {
+      margin-top: 26px;
+      background: var(--panel);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+    .terms h2 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin: 0 0 10px;
+    }
+    .terms ul { margin: 0; padding-left: 18px; }
+    .terms li { margin: 5px 0; font-size: 14px; }
+    footer {
+      margin-top: 26px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    @media (min-width: 768px) {
+      h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="brand">Otieno Boda Deliveries</p>
+      <h1>Delivery charges by area</h1>
+      <p class="sub">Fixed rates from Westlands. Type your area to see the price. No haggling needed.</p>
+    </header>
+
+    <div class="search">
+      <input id="search" type="text" placeholder="Search your area, e.g. Kilimani" autocomplete="off" aria-label="Search your area">
+    </div>
+
+    <div class="list" id="list"></div>
+
+    <div class="terms">
+      <h2>Good to know</h2>
+      <ul>
+        <li>Prices are one way, per trip, from the Westlands pickup point.</li>
+        <li>Very large or heavy items may cost a little more. I will tell you before I ride.</li>
+        <li>Return trips are charged as two trips.</li>
+        <li>Rain or heavy traffic does not change the price on this list.</li>
+      </ul>
+    </div>
+
+    <footer>
+      Not sure of your area? Call or WhatsApp <a id="phone" href="tel:+254700000000">0700 000 000</a>.
+    </footer>
+  </div>
+
+  <script>
+    // ------------------------------------------------------------------
+    // EDIT YOUR PRICES HERE.
+    // Change any number, add a row, or remove one. price is in Kenyan
+    // shillings. note is optional (leave "" for none). Save the file and
+    // refresh the page. These figures are a starting point Otieno should
+    // confirm against his real charges.
+    // ------------------------------------------------------------------
+    var RATES = [
+      { area: "Westlands (within)", price: 100, note: "Sarit, Westgate, ABC Place area" },
+      { area: "Parklands",          price: 150, note: "" },
+      { area: "Highridge",          price: 150, note: "" },
+      { area: "Spring Valley",      price: 200, note: "" },
+      { area: "Riverside",          price: 200, note: "" },
+      { area: "Kileleshwa",         price: 250, note: "" },
+      { area: "Kilimani",           price: 250, note: "" },
+      { area: "Lavington",          price: 300, note: "" },
+      { area: "Kangemi",            price: 250, note: "" },
+      { area: "Loresho",            price: 300, note: "" },
+      { area: "Mountain View",      price: 300, note: "" },
+      { area: "Gigiri / UN",        price: 350, note: "" },
+      { area: "Muthaiga",           price: 350, note: "" },
+      { area: "Runda",              price: 400, note: "" },
+      { area: "CBD / Town",         price: 350, note: "" }
+    ];
+
+    // Set your real number here (used for both the tel link and the text).
+    var PHONE_DISPLAY = "0700 000 000";
+    var PHONE_DIAL = "+254700000000";
+
+    var listEl = document.getElementById("list");
+    var searchEl = document.getElementById("search");
+    var phoneEl = document.getElementById("phone");
+    phoneEl.textContent = PHONE_DISPLAY;
+    phoneEl.href = "tel:" + PHONE_DIAL;
+
+    function ksh(n) {
+      return "Ksh " + n.toLocaleString("en-KE");
+    }
+
+    function render(filter) {
+      var q = (filter || "").trim().toLowerCase();
+      var rows = RATES.filter(function (r) {
+        return r.area.toLowerCase().indexOf(q) !== -1 ||
+               (r.note && r.note.toLowerCase().indexOf(q) !== -1);
+      });
+      if (rows.length === 0) {
+        listEl.innerHTML = '<div class="empty">Area not listed. Please call or WhatsApp for a quote.</div>';
+        return;
+      }
+      listEl.innerHTML = rows.map(function (r) {
+        var note = r.note ? '<span class="note">' + r.note + '</span>' : '';
+        return '<div class="row"><div><span class="area">' + r.area + '</span>' +
+               note + '</div><span class="price">' + ksh(r.price) + '</span></div>';
+      }).join("");
+    }
+
+    searchEl.addEventListener("input", function () { render(searchEl.value); });
+    render("");
+  </script>
+</body>
+</html>
