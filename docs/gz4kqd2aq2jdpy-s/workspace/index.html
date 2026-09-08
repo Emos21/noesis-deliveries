@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<!--
+  ==========================================================
+  SHOE PRICE PAGE
+  ==========================================================
+  Grace, you do not need to edit this file.
+
+  Open the page on your phone and tap the "Set my prices"
+  button at the top. Type your own numbers there, then tap
+  Save. Your prices stay on your phone and the reminder bar
+  disappears, so the page is clean when you show a customer.
+
+  Everything is inside this one file. No internet is needed
+  once it is on your phone.
+  ==========================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shoe prices</title>
+<meta name="description" content="Secondhand shoe prices for men, ladies and kids.">
+<style>
+  :root {
+    --ink: #1d1a17;
+    --soft: #6b625a;
+    --line: #e6dfd7;
+    --paper: #ffffff;
+    --wash: #f8f5f1;
+    --accent: #8a4b28;
+    --accent-soft: #f3e9e1;
+    --warn-bg: #fdf4d8;
+    --warn-line: #e3c982;
+    --warn-ink: #6a5310;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--wash);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.45;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .sheet {
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--paper);
+    min-height: 100vh;
+    padding: 18px 16px 40px;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+
+  /* ---- the owner bar, only Grace uses this ---- */
+
+  .ownerbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 16px;
+  }
+
+  button {
+    font: inherit;
+    font-size: 15px;
+    padding: 11px 14px;
+    min-height: 44px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--wash);
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  button.main {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  button.quiet {
+    background: transparent;
+    border-color: transparent;
+    color: var(--soft);
+    text-decoration: underline;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  button.remove {
+    border-color: var(--line);
+    color: #8a2b2b;
+    padding: 9px 12px;
+    min-height: 40px;
+    font-size: 14px;
+  }
+
+  .notice {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-line);
+    color: var(--warn-ink);
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    margin: 0 0 18px;
+  }
+
+  .notice strong { font-weight: 600; }
+
+  /* ---- the page a customer sees ---- */
+
+  header {
+    margin: 0 0 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  h1 {
+    font-size: 28px;
+    line-height: 1.12;
+    margin: 0 0 5px;
+    letter-spacing: -0.01em;
+  }
+
+  header .where {
+    margin: 0;
+    color: var(--soft);
+    font-size: 15.5px;
+  }
+
+  section { margin: 0 0 24px; }
+
+  h2 {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 6px;
+    padding-bottom: 7px;
+    border-bottom: 2px solid var(--line);
+  }
+
+  ul.items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul.items li {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  ul.items li:last-child { border-bottom: none; }
+
+  .item { flex: 1 1 auto; }
+
+  .item .note {
+    display: block;
+    font-size: 14px;
+    color: var(--soft);
+  }
+
+  .price {
+    flex: 0 0 auto;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  footer {
+    margin-top: 8px;
+    padding-top: 18px;
+    border-top: 2px solid var(--line);
+    color: var(--soft);
+    font-size: 15.5px;
+  }
+
+  footer p { margin: 0 0 8px; }
+  footer p:last-child { margin-bottom: 0; }
+  footer .contact {
+    color: var(--ink);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- editing ---- */
+
+  .editing section {
+    background: var(--wash);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 12px 14px;
+  }
+
+  label.field {
+    display: block;
+    margin: 0 0 10px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    font: inherit;
+    font-size: 16px;
+    width: 100%;
+    padding: 10px 11px;
+    min-height: 44px;
+    margin-top: 4px;
+    border: 1px solid #cfc6bc;
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  input[type="number"] { font-variant-numeric: tabular-nums; }
+
+  .editrow {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .editrow:last-of-type { border-bottom: none; }
+
+  .editrow .pair {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    margin-top: 6px;
+  }
+
+  .editrow .pair .money { flex: 0 0 118px; }
+  .editrow .pair .grow { flex: 1 1 auto; }
+
+  .editrow .rowfoot {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+
+  .savebar {
+    position: sticky;
+    bottom: 0;
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    padding: 12px 0 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .keepsafe {
+    margin: 14px 0 0;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    font-size: 14.5px;
+    color: var(--soft);
+  }
+
+  .keepsafe p { margin: 0 0 8px; }
+
+  .hide { display: none; }
+
+  .saved {
+    background: var(--accent-soft);
+    border: 1px solid var(--line);
+    color: var(--accent);
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 380px) {
+    body { font-size: 16px; }
+    .sheet { padding: 14px 13px 34px; }
+    h1 { font-size: 24px; }
+    .price { font-size: 18px; }
+    .editrow .pair { flex-wrap: wrap; }
+    .editrow .pair .money { flex: 1 1 100%; }
+  }
+
+  @media (min-width: 700px) {
+    .sheet { padding: 30px 34px 50px; }
+    h1 { font-size: 32px; }
+  }
+
+  @media print {
+    body { background: #fff; font-size: 12.5px; }
+    .sheet { border: none; min-height: 0; padding: 0; max-width: none; }
+    .ownerbar, .notice, .savebar, .saved, .keepsafe { display: none; }
+    h1 { font-size: 22px; }
+    section { margin-bottom: 14px; }
+    ul.items li { padding: 5px 0; }
+  }
+</style>
+</head>
+<body>
+
+<main class="sheet" id="sheet">
+
+  <div class="ownerbar" id="ownerbar">
+    <button type="button" class="main" id="editBtn">Set my prices</button>
+  </div>
+
+  <p class="notice" id="notice">
+    <strong>These are example prices, not yours yet.</strong>
+    Tap "Set my prices" above, type your own numbers, then tap Save.
+    This yellow bar goes away on its own after you save.
+  </p>
+
+  <p class="saved hide" id="savedMsg">Saved on this phone.</p>
+
+  <div id="view"></div>
+
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  var KEY = "shoe-price-page-v1";
+
+  var EXAMPLE = {
+    priced: false,
+    stall: {
+      name: "Grace's Shoes",
+      where: "Gikomba market, Nairobi. Prices in Kenya Shillings.",
+      contact: "07XX XXX XXX",
+      note: "Price is per pair. Tell me your size and I will look for it."
+    },
+    groups: [
+      {
+        title: "Men's shoes",
+        items: [
+          { name: "Official leather shoes", note: "Best pick, almost new", price: 1200 },
+          { name: "Official leather shoes", note: "Good, lightly used", price: 700 },
+          { name: "Sneakers, big name", note: "Nike, Adidas and the like", price: 1800 },
+          { name: "Sneakers, ordinary", note: "", price: 800 },
+          { name: "Boots", note: "Safari and work boots", price: 1500 },
+          { name: "Canvas and rubber shoes", note: "", price: 500 },
+          { name: "Sandals and open shoes", note: "", price: 400 }
+        ]
+      },
+      {
+        title: "Ladies' shoes",
+        items: [
+          { name: "Flat shoes", note: "", price: 500 },
+          { name: "Heels", note: "", price: 800 },
+          { name: "Office shoes, closed", note: "", price: 700 },
+          { name: "Sneakers, big name", note: "Nike, Adidas and the like", price: 1500 },
+          { name: "Sneakers, ordinary", note: "", price: 700 },
+          { name: "Boots", note: "Ankle and long boots", price: 1200 },
+          { name: "Sandals and open shoes", note: "", price: 400 }
+        ]
+      },
+      {
+        title: "Kids' shoes",
+        items: [
+          { name: "School shoes, black", note: "Small sizes, 25 to 32", price: 400 },
+          { name: "School shoes, black", note: "Bigger sizes, 33 to 38", price: 600 },
+          { name: "Sneakers", note: "Small sizes", price: 350 },
+          { name: "Sneakers", note: "Bigger sizes", price: 550 },
+          { name: "Sandals and open shoes", note: "", price: 250 },
+          { name: "Gumboots", note: "", price: 350 },
+          { name: "Baby shoes", note: "Below size 24", price: 200 }
+        ]
+      }
+    ]
+  };
+
+  var els = {
+    sheet: document.getElementById("sheet"),
+    ownerbar: document.getElementById("ownerbar"),
+    notice: document.getElementById("notice"),
+    savedMsg: document.getElementById("savedMsg"),
+    view: document.getElementById("view"),
+    editBtn: document.getElementById("editBtn")
+  };
+
+  var state = null;
+  var draft = null;
+  var editing = false;
+
+  function copy(x) { return JSON.parse(JSON.stringify(x)); }
+
+  function money(n) {
+    var s = String(Math.round(Math.abs(Number(n) || 0)));
+    var out = "";
+    var count = 0;
+    for (var i = s.length - 1; i >= 0; i--) {
+      out = s.charAt(i) + out;
+      count++;
+      if (count % 3 === 0 && i > 0) { out = "," + out; }
+    }
+    return "KSh " + out;
+  }
+
+  function text(v) { return typeof v === "string" ? v : ""; }
+
+  function tidy(data) {
+    var safe = copy(EXAMPLE);
+    if (!data || typeof data !== "object") { return safe; }
+
+    var out = { priced: data.priced === true, stall: {}, groups: [] };
+    var stall = (data.stall && typeof data.stall === "object") ? data.stall : {};
+    out.stall.name = text(stall.name) || safe.stall.name;
+    out.stall.where = text(stall.where);
+    out.stall.contact = text(stall.contact);
+    out.stall.note = text(stall.note);
+
+    var groups = Array.isArray(data.groups) ? data.groups : [];
+    for (var g = 0; g < groups.length; g++) {
+      var grp = groups[g];
+      if (!grp || typeof grp !== "object") { continue; }
+      var items = Array.isArray(grp.items) ? grp.items : [];
+      var clean = [];
+      for (var i = 0; i < items.length; i++) {
+        var it = items[i];
+        if (!it || typeof it !== "object") { continue; }
+        var price = Number(it.price);
+        if (!isFinite(price) || price < 0) { price = 0; }
+        clean.push({
+          name: text(it.name),
+          note: text(it.note),
+          price: Math.round(price)
+        });
+      }
+      out.groups.push({ title: text(grp.title), items: clean });
+    }
+    if (!out.groups.length) { out.groups = safe.groups; }
+    return out;
+  }
+
+  function load() {
+    var raw = null;
+    try { raw = window.localStorage.getItem(KEY); } catch (e) { raw = null; }
+    if (!raw) { return copy(EXAMPLE); }
+    try { return tidy(JSON.parse(raw)); } catch (e) { return copy(EXAMPLE); }
+  }
+
+  function save() {
+    try {
+      window.localStorage.setItem(KEY, JSON.stringify(state));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function el(tag, cls, txt) {
+    var n = document.createElement(tag);
+    if (cls) { n.className = cls; }
+    if (txt !== undefined && txt !== null) { n.textContent = txt; }
+    return n;
+  }
+
+  function input(kind, value, placeholder) {
+    var n = document.createElement("input");
+    n.type = kind;
+    n.value = value;
+    if (placeholder) { n.placeholder = placeholder; }
+    if (kind === "number") {
+      n.min = "0";
+      n.step = "1";
+      n.inputMode = "numeric";
+    }
+    return n;
+  }
+
+  function labelled(labelText, field) {
+    var wrap = el("label", "field", labelText);
+    wrap.appendChild(field);
+    return wrap;
+  }
+
+  /* ---------- customer view ---------- */
+
+  function renderView() {
+    els.view.innerHTML = "";
+    els.sheet.classList.remove("editing");
+
+    var head = el("header");
+    head.appendChild(el("h1", null, state.stall.name));
+    if (state.stall.where) {
+      head.appendChild(el("p", "where", state.stall.where));
+    }
+    els.view.appendChild(head);
+
+    for (var g = 0; g < state.groups.length; g++) {
+      var grp = state.groups[g];
+      var rows = [];
+      for (var i = 0; i < grp.items.length; i++) {
+        if (grp.items[i].name) { rows.push(grp.items[i]); }
+      }
+      if (!rows.length) { continue; }
+
+      var sec = el("section");
+      if (grp.title) { sec.appendChild(el("h2", null, grp.title)); }
+      var ul = el("ul", "items");
+      for (var r = 0; r < rows.length; r++) {
+        var li = el("li");
+        var name = el("span", "item", rows[r].name);
+        if (rows[r].note) { name.appendChild(el("span", "note", rows[r].note)); }
+        li.appendChild(name);
+        li.appendChild(el("span", "price", money(rows[r].price)));
+        ul.appendChild(li);
+      }
+      sec.appendChild(ul);
+      els.view.appendChild(sec);
+    }
+
+    if (state.stall.contact || state.stall.note) {
+      var foot = el("footer");
+      if (state.stall.contact) {
+        var line = el("p", null, "Call or WhatsApp: ");
+        line.appendChild(el("strong", "contact", state.stall.contact));
+        foot.appendChild(line);
+      }
+      if (state.stall.note) { foot.appendChild(el("p", null, state.stall.note)); }
+      els.view.appendChild(foot);
+    }
+
+    els.editBtn.textContent = state.priced ? "Edit prices" : "Set my prices";
+    els.notice.classList.toggle("hide", state.priced === true);
+  }
+
+  /* ---------- edit view ---------- */
+
+  function editRow(item, list, index, redraw) {
+    var row = el("div", "editrow");
+
+    var nameIn = input("text", item.name, "Kind of shoe");
+    nameIn.addEventListener("input", function () { item.name = nameIn.value; });
+    row.appendChild(labelled("Shoe", nameIn));
+
+    var pair = el("div", "pair");
+
+    var noteIn = input("text", item.note, "Sizes, grade, anything extra");
+    noteIn.addEventListener("input", function () { item.note = noteIn.value; });
+    var noteWrap = labelled("Small note, can be empty", noteIn);
+    noteWrap.className = "field grow";
+    pair.appendChild(noteWrap);
+
+    var priceIn = input("number", item.price, "0");
+    priceIn.addEventListener("input", function () {
+      var v = Math.round(Number(priceIn.value));
+      item.price = (isFinite(v) && v >= 0) ? v : 0;
+    });
+    var priceWrap = labelled("Price, KSh", priceIn);
+    priceWrap.className = "field money";
+    pair.appendChild(priceWrap);
+
+    row.appendChild(pair);
+
+    var rowfoot = el("div", "rowfoot");
+    var del = el("button", "remove", "Remove this shoe");
+    del.type = "button";
+    del.addEventListener("click", function () {
+      list.splice(index, 1);
+      redraw();
+    });
+    rowfoot.appendChild(del);
+    row.appendChild(rowfoot);
+
+    return row;
+  }
+
+  function renderEdit() {
+    els.view.innerHTML = "";
+    els.sheet.classList.add("editing");
+    els.notice.classList.add("hide");
+    els.savedMsg.classList.add("hide");
+
+    var top = el("section");
+    top.appendChild(el("h2", null, "Top of the page"));
+
+    var nameIn = input("text", draft.stall.name, "Your stall name");
+    nameIn.addEventListener("input", function () { draft.stall.name = nameIn.value; });
+    top.appendChild(labelled("Name shown at the top", nameIn));
+
+    var whereIn = input("text", draft.stall.where, "Where you are");
+    whereIn.addEventListener("input", function () { draft.stall.where = whereIn.value; });
+    top.appendChild(labelled("Line under the name", whereIn));
+
+    els.view.appendChild(top);
+
+    for (var g = 0; g < draft.groups.length; g++) {
+      els.view.appendChild(groupBlock(draft.groups[g]));
+    }
+
+    var bottom = el("section");
+    bottom.appendChild(el("h2", null, "Bottom of the page"));
+
+    var phoneIn = input("text", draft.stall.contact, "07XX XXX XXX");
+    phoneIn.addEventListener("input", function () { draft.stall.contact = phoneIn.value; });
+    bottom.appendChild(labelled("Your phone number", phoneIn));
+
+    var noteIn = input("text", draft.stall.note, "Anything you want customers to read");
+    noteIn.addEventListener("input", function () { draft.stall.note = noteIn.value; });
+    bottom.appendChild(labelled("Last line", noteIn));
+
+    els.view.appendChild(bottom);
+
+    var bar = el("div", "savebar");
+
+    var saveBtn = el("button", "main", "Save");
+    saveBtn.type = "button";
+    saveBtn.addEventListener("click", function () { commit(); });
+    bar.appendChild(saveBtn);
+
+    var cancelBtn = el("button", null, "Cancel");
+    cancelBtn.type = "button";
+    cancelBtn.addEventListener("click", function () { stopEditing(); });
+    bar.appendChild(cancelBtn);
+
+    var resetBtn = el("button", "quiet", "Start again with the example list");
+    resetBtn.type = "button";
+    resetBtn.addEventListener("click", function () {
+      if (window.confirm("Throw away what is on the page now and go back to the example list?")) {
+        draft = copy(EXAMPLE);
+        draft.priced = state.priced;
+        renderEdit();
+      }
+    });
+    bar.appendChild(resetBtn);
+
+    els.view.appendChild(bar);
+    els.view.appendChild(keepSafeBlock());
+  }
+
+  function groupBlock(grp) {
+    var sec = el("section");
+
+    var titleIn = input("text", grp.title, "Heading, for example Men's shoes");
+    titleIn.addEventListener("input", function () { grp.title = titleIn.value; });
+    sec.appendChild(labelled("Heading", titleIn));
+
+    for (var i = 0; i < grp.items.length; i++) {
+      sec.appendChild(editRow(grp.items[i], grp.items, i, renderEdit));
+    }
+
+    var add = el("button", null, "Add a shoe here");
+    add.type = "button";
+    add.addEventListener("click", function () {
+      grp.items.push({ name: "", note: "", price: 0 });
+      renderEdit();
+    });
+    sec.appendChild(add);
+
+    return sec;
+  }
+
+  function keepSafeBlock() {
+    var box = el("div", "keepsafe");
+    box.appendChild(el("p", null,
+      "Your prices are kept on this phone only. If you clear the phone's browser " +
+      "or move to another phone they are gone, so keep a spare copy."));
+
+    var out = el("button", null, "Save a copy to my files");
+    out.type = "button";
+    out.addEventListener("click", function () {
+      var blob = new Blob([JSON.stringify(draft, null, 2)], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "my-shoe-prices.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+    box.appendChild(out);
+
+    var picker = document.createElement("input");
+    picker.type = "file";
+    picker.accept = "application/json,.json";
+    picker.className = "hide";
+    picker.addEventListener("change", function () {
+      var file = picker.files[0];
+      if (!file) { return; }
+      var reader = new FileReader();
+      reader.onload = function () {
+        try {
+          draft = tidy(JSON.parse(reader.result));
+          renderEdit();
+        } catch (e) {
+          window.alert("That file could not be read as a price list.");
+        }
+      };
+      reader.readAsText(file);
+      picker.value = "";
+    });
+
+    var inBtn = el("button", null, "Open a saved copy");
+    inBtn.type = "button";
+    inBtn.addEventListener("click", function () { picker.click(); });
+    box.appendChild(inBtn);
+    box.appendChild(picker);
+
+    return box;
+  }
+
+  /* ---------- switching ---------- */
+
+  function startEditing() {
+    draft = copy(state);
+    editing = true;
+    els.editBtn.classList.add("hide");
+    renderEdit();
+    window.scrollTo(0, 0);
+  }
+
+  function stopEditing() {
+    editing = false;
+    draft = null;
+    els.editBtn.classList.remove("hide");
+    renderView();
+    window.scrollTo(0, 0);
+  }
+
+  function commit() {
+    state = tidy(draft);
+    state.priced = true;
+    var ok = save();
+    stopEditing();
+    if (ok) {
+      els.savedMsg.textContent = "Saved on this phone.";
+    } else {
+      els.savedMsg.textContent =
+        "Shown on the page, but this phone would not store it. It will go back to " +
+        "the example list if you close the page.";
+    }
+    els.savedMsg.classList.remove("hide");
+    window.setTimeout(function () { els.savedMsg.classList.add("hide"); }, 6000);
+  }
+
+  els.editBtn.addEventListener("click", function () {
+    if (!editing) { startEditing(); }
+  });
+
+  state = load();
+  renderView();
+})();
+</script>
+
+</body>
+</html>

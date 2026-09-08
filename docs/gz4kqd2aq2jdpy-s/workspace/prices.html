@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbfaf8">
+<title>Prices</title>
+<style>
+  :root {
+    --bg: #fbfaf8;
+    --card: #ffffff;
+    --ink: #171412;
+    --muted: #6d655e;
+    --line: #e6e0d8;
+    --accent: #8f2c2c;
+    --focus: #1c5fd4;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.45;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(0.75rem, 4vw, 3rem);
+  }
+
+  @supports (min-height: 100dvh) {
+    body { min-height: 100dvh; }
+  }
+
+  .card {
+    width: 100%;
+    max-width: 30rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--accent);
+    border-radius: 4px;
+    padding: clamp(1.25rem, 6vw, 2.25rem);
+  }
+
+  @media (min-width: 48rem) {
+    body { align-items: center; }
+    .card { border-radius: 6px; box-shadow: 0 1px 3px rgba(23, 20, 18, 0.06); }
+  }
+
+  .place {
+    margin: 0 0 0.25rem;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(1.5rem, 6.5vw, 1.875rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+    overflow-wrap: break-word;
+  }
+
+  .setup {
+    margin: 1.25rem 0 0;
+    padding: 0.875rem 1rem;
+    background: #fdf6ec;
+    border: 1px solid #ecd9bb;
+    border-radius: 4px;
+    color: #6b4a1c;
+    font-size: 0.9375rem;
+  }
+
+  .list {
+    list-style: none;
+    margin: clamp(1.25rem, 5vw, 1.75rem) 0 0;
+    padding: 0;
+  }
+
+  .row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: clamp(0.9rem, 4vw, 1.15rem) 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .row:last-child { border-bottom: 1px solid var(--line); }
+
+  .svc {
+    font-size: clamp(1.0625rem, 4.6vw, 1.1875rem);
+    font-weight: 600;
+  }
+
+  .price {
+    font-size: clamp(1.5rem, 7vw, 1.875rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .price .cur {
+    font-size: 0.6em;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    margin-right: 0.2em;
+    vertical-align: 0.08em;
+  }
+
+  .price.unset {
+    font-size: clamp(0.9375rem, 4vw, 1rem);
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+
+  .foot {
+    margin: 1.25rem 0 0;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    overflow-wrap: break-word;
+  }
+
+  .tools {
+    margin-top: clamp(1.5rem, 6vw, 2rem);
+    padding-top: 1rem;
+    border-top: 1px dashed var(--line);
+  }
+
+  button {
+    font: inherit;
+    min-height: 2.875rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .link-btn {
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .link-btn:hover { border-color: var(--muted); color: var(--ink); }
+
+  .fields { margin: 0; padding: 0; border: 0; }
+
+  .field { display: block; margin-bottom: 1rem; }
+
+  .field span {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .field input {
+    font: inherit;
+    width: 100%;
+    min-height: 2.875rem;
+    padding: 0.55rem 0.7rem;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+
+  .field input:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 0.625rem; }
+
+  .primary {
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    color: #fff;
+    font-weight: 600;
+    flex: 1 1 8rem;
+  }
+
+  .primary:hover { background: #000; }
+
+  .hint {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  [hidden] { display: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .card { border: 0; box-shadow: none; max-width: none; }
+    .tools, .setup { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="card">
+  <header>
+    <p class="place">Kawangware, Nairobi</p>
+    <h1 id="shopName">Barbershop</h1>
+  </header>
+
+  <p class="setup" id="setup" hidden>
+    Tap "Edit prices" below and put in your own prices. This note goes away
+    once you save.
+  </p>
+
+  <ul class="list">
+    <li class="row">
+      <span class="svc">Haircut</span>
+      <span class="price unset" id="price-haircut">Not set yet</span>
+    </li>
+    <li class="row">
+      <span class="svc">Shave</span>
+      <span class="price unset" id="price-shave">Not set yet</span>
+    </li>
+    <li class="row">
+      <span class="svc">Dye</span>
+      <span class="price unset" id="price-dye">Not set yet</span>
+    </li>
+  </ul>
+
+  <p class="foot" id="footNote" hidden></p>
+
+  <div class="tools">
+    <button type="button" class="link-btn" id="editBtn">Edit prices</button>
+
+    <form id="editForm" hidden novalidate>
+      <p class="hint" id="storeHint" hidden>
+        This phone will not remember the prices, so keep this page open while
+        you use it.
+      </p>
+      <fieldset class="fields">
+        <label class="field">
+          <span>Shop name</span>
+          <input type="text" id="in-name" maxlength="40" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>Haircut price (KSh)</span>
+          <input type="number" id="in-haircut" inputmode="numeric" min="0"
+            max="100000" step="1" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>Shave price (KSh)</span>
+          <input type="number" id="in-shave" inputmode="numeric" min="0"
+            max="100000" step="1" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>Dye price (KSh)</span>
+          <input type="number" id="in-dye" inputmode="numeric" min="0"
+            max="100000" step="1" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>Phone number or a short note (optional)</span>
+          <input type="text" id="in-foot" maxlength="60" autocomplete="off">
+        </label>
+      </fieldset>
+      <div class="actions">
+        <button type="submit" class="primary">Save</button>
+        <button type="button" class="link-btn" id="cancelBtn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORE_KEY = "barbershop-prices-v1";
+  var SERVICES = ["haircut", "shave", "dye"];
+  var DEFAULT_NAME = "Barbershop";
+
+  var el = function (id) { return document.getElementById(id); };
+
+  var store = {
+    read: function () {
+      try {
+        var raw = window.localStorage.getItem(STORE_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (e) {
+        return null;
+      }
+    },
+    write: function (data) {
+      try {
+        window.localStorage.setItem(STORE_KEY, JSON.stringify(data));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    },
+    works: function () {
+      try {
+        window.localStorage.setItem(STORE_KEY + "-probe", "1");
+        window.localStorage.removeItem(STORE_KEY + "-probe");
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+  };
+
+  function cleanPrice(value) {
+    var n = parseInt(String(value).replace(/[^0-9]/g, ""), 10);
+    if (isNaN(n) || n < 0 || n > 100000) { return null; }
+    return n;
+  }
+
+  function fromHash() {
+    var hash = window.location.hash.replace(/^#/, "");
+    if (!hash) { return null; }
+    var out = { prices: {} }, found = false, i, pair, parts, key, val;
+    var pairs = hash.split("&");
+    for (i = 0; i < pairs.length; i += 1) {
+      pair = pairs[i];
+      if (!pair) { continue; }
+      parts = pair.split("=");
+      key = decodeURIComponent(parts[0] || "");
+      try {
+        val = decodeURIComponent((parts[1] || "").replace(/\+/g, " "));
+      } catch (e) {
+        val = "";
+      }
+      if (SERVICES.indexOf(key) !== -1) {
+        out.prices[key] = cleanPrice(val);
+        found = true;
+      } else if (key === "name") {
+        out.name = val.slice(0, 40);
+        found = true;
+      } else if (key === "note") {
+        out.note = val.slice(0, 60);
+        found = true;
+      }
+    }
+    return found ? out : null;
+  }
+
+  function toHash(data) {
+    var parts = [], i, key, value;
+    for (i = 0; i < SERVICES.length; i += 1) {
+      key = SERVICES[i];
+      value = data.prices[key];
+      if (value !== null && value !== undefined) {
+        parts.push(key + "=" + value);
+      }
+    }
+    if (data.name && data.name !== DEFAULT_NAME) {
+      parts.push("name=" + encodeURIComponent(data.name));
+    }
+    if (data.note) { parts.push("note=" + encodeURIComponent(data.note)); }
+    return parts.join("&");
+  }
+
+  function blank() {
+    return { name: DEFAULT_NAME, note: "", prices: { haircut: null, shave: null, dye: null } };
+  }
+
+  function normalise(raw) {
+    var data = blank(), i, key, value;
+    if (!raw || typeof raw !== "object") { return data; }
+    if (typeof raw.name === "string" && raw.name.trim()) {
+      data.name = raw.name.trim().slice(0, 40);
+    }
+    if (typeof raw.note === "string") { data.note = raw.note.trim().slice(0, 60); }
+    if (raw.prices && typeof raw.prices === "object") {
+      for (i = 0; i < SERVICES.length; i += 1) {
+        key = SERVICES[i];
+        value = raw.prices[key];
+        data.prices[key] = (value === null || value === undefined || value === "")
+          ? null
+          : cleanPrice(value);
+      }
+    }
+    return data;
+  }
+
+  function anyPriceSet(data) {
+    var i;
+    for (i = 0; i < SERVICES.length; i += 1) {
+      if (data.prices[SERVICES[i]] !== null) { return true; }
+    }
+    return false;
+  }
+
+  function withCommas(n) {
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  var state = normalise(fromHash() || store.read());
+
+  function render() {
+    var i, key, value, node;
+
+    el("shopName").textContent = state.name;
+    document.title = state.name + " prices";
+
+    for (i = 0; i < SERVICES.length; i += 1) {
+      key = SERVICES[i];
+      value = state.prices[key];
+      node = el("price-" + key);
+      if (value === null) {
+        node.textContent = "Not set yet";
+        node.classList.add("unset");
+      } else {
+        node.textContent = "";
+        var cur = document.createElement("span");
+        cur.className = "cur";
+        cur.textContent = "KSh";
+        node.appendChild(cur);
+        node.appendChild(document.createTextNode(withCommas(value)));
+        node.classList.remove("unset");
+      }
+    }
+
+    if (state.note) {
+      el("footNote").textContent = state.note;
+      el("footNote").hidden = false;
+    } else {
+      el("footNote").textContent = "";
+      el("footNote").hidden = true;
+    }
+
+    el("setup").hidden = anyPriceSet(state);
+  }
+
+  function fillForm() {
+    el("in-name").value = state.name === DEFAULT_NAME ? "" : state.name;
+    el("in-name").placeholder = DEFAULT_NAME;
+    el("in-foot").value = state.note;
+    var i, key;
+    for (i = 0; i < SERVICES.length; i += 1) {
+      key = SERVICES[i];
+      el("in-" + key).value = state.prices[key] === null ? "" : state.prices[key];
+    }
+  }
+
+  function openForm() {
+    fillForm();
+    el("storeHint").hidden = store.works();
+    el("editForm").hidden = false;
+    el("editBtn").hidden = true;
+    el("in-name").focus();
+  }
+
+  function closeForm() {
+    el("editForm").hidden = true;
+    el("editBtn").hidden = false;
+    el("editBtn").focus();
+  }
+
+  el("editBtn").addEventListener("click", openForm);
+  el("cancelBtn").addEventListener("click", closeForm);
+
+  el("editForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    var next = blank(), i, key, typed;
+    typed = el("in-name").value.trim();
+    next.name = typed ? typed.slice(0, 40) : DEFAULT_NAME;
+    next.note = el("in-foot").value.trim().slice(0, 60);
+    for (i = 0; i < SERVICES.length; i += 1) {
+      key = SERVICES[i];
+      typed = el("in-" + key).value.trim();
+      next.prices[key] = typed === "" ? null : cleanPrice(typed);
+    }
+    state = next;
+    store.write(state);
+    try {
+      var hash = toHash(state);
+      window.history.replaceState(null, "", hash ? "#" + hash : window.location.pathname);
+    } catch (e) {
+      window.location.hash = toHash(state);
+    }
+    render();
+    closeForm();
+  });
+
+  window.addEventListener("hashchange", function () {
+    var fromLink = fromHash();
+    if (fromLink) {
+      state = normalise(fromLink);
+      render();
+    }
+  });
+
+  render();
+}());
+</script>
+</body>
+</html>
