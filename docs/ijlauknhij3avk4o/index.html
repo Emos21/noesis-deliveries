@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163231">
+  <meta name="description" content="Simple barber price list for Kawangware, Nairobi.">
+  <title>Kawangware Barber | Price List</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #163231;
+      --ink-soft: #526360;
+      --paper: #fffdf8;
+      --canvas: #efe8db;
+      --line: #ded5c5;
+      --accent: #df5639;
+      --accent-soft: #f5d6c9;
+      --whatsapp: #187d53;
+      --shadow: 0 24px 70px rgba(31, 42, 38, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--canvas);
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 8%, rgba(255, 255, 255, 0.84), transparent 28rem),
+        linear-gradient(145deg, #f3eee4 0%, #e9dfcf 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before,
+    body::after {
+      position: fixed;
+      z-index: 0;
+      width: 12rem;
+      height: 12rem;
+      border: 1px solid rgba(22, 50, 49, 0.08);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+
+    body::before {
+      top: -6rem;
+      right: -4rem;
+    }
+
+    body::after {
+      bottom: -7rem;
+      left: -5rem;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      min-height: 100vh;
+      place-items: center;
+      padding: 24px 16px;
+    }
+
+    .price-card {
+      position: relative;
+      width: min(100%, 430px);
+      overflow: hidden;
+      border: 1px solid rgba(22, 50, 49, 0.1);
+      border-radius: 30px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .barber-stripe {
+      height: 8px;
+      background: repeating-linear-gradient(
+        120deg,
+        var(--ink) 0 22px,
+        #faf6ed 22px 38px,
+        var(--accent) 38px 60px,
+        #faf6ed 60px 76px
+      );
+    }
+
+    header {
+      padding: 34px 28px 24px;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--accent);
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .mark {
+      display: grid;
+      flex: 0 0 auto;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      color: var(--paper);
+      background: var(--ink);
+      place-items: center;
+      transform: rotate(-7deg);
+    }
+
+    .mark svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    h1 {
+      max-width: 330px;
+      margin: 20px 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.7rem, 12vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.055em;
+      line-height: 0.92;
+    }
+
+    .intro {
+      max-width: 31ch;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+
+    .price-list {
+      margin: 0 28px;
+      padding: 4px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .service {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 18px;
+      min-height: 62px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .service:last-child {
+      border-bottom: 0;
+    }
+
+    .service-name {
+      font-size: 0.96rem;
+      font-weight: 650;
+      line-height: 1.3;
+    }
+
+    .service-price {
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .details {
+      padding: 24px 28px 30px;
+    }
+
+    .notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 22px;
+      padding: 14px 15px;
+      border-radius: 16px;
+      color: var(--ink-soft);
+      background: #f4efe6;
+      font-size: 0.79rem;
+      line-height: 1.45;
+    }
+
+    .notice::before {
+      display: block;
+      flex: 0 0 auto;
+      width: 7px;
+      height: 7px;
+      margin-top: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      content: "";
+    }
+
+    .share-button {
+      display: flex;
+      min-height: 56px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 18px;
+      color: #fff;
+      background: var(--whatsapp);
+      box-shadow: 0 12px 24px rgba(24, 125, 83, 0.22);
+      font-size: 0.96rem;
+      font-weight: 760;
+      text-decoration: none;
+      transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+    }
+
+    .share-button:hover {
+      background: #126c47;
+      box-shadow: 0 14px 28px rgba(24, 125, 83, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .share-button:focus-visible {
+      outline: 3px solid var(--accent-soft);
+      outline-offset: 4px;
+    }
+
+    .share-button svg {
+      width: 21px;
+      height: 21px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.8;
+    }
+
+    .location {
+      margin: 17px 0 0;
+      color: var(--ink-soft);
+      font-size: 0.76rem;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 370px) {
+      header,
+      .details {
+        padding-right: 22px;
+        padding-left: 22px;
+      }
+
+      .price-list {
+        margin-right: 22px;
+        margin-left: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .share-button {
+        transition: none;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      body::before,
+      body::after {
+        display: none;
+      }
+
+      main {
+        min-height: auto;
+        padding: 0;
+      }
+
+      .price-card {
+        width: 100%;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .share-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article class="price-card" aria-labelledby="page-title">
+      <div class="barber-stripe" aria-hidden="true"></div>
+
+      <header>
+        <div class="brand-row">
+          <p class="eyebrow">Kawangware Barber</p>
+          <div class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle cx="6" cy="6" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+              <circle cx="6" cy="18" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+              <path d="m8.6 7.8 10 7.2M8.6 16.2l10-7.2M18.6 9 21 7.4M18.6 15l2.4 1.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+            </svg>
+          </div>
+        </div>
+        <h1 id="page-title">Fresh cuts.<br>Fair prices.</h1>
+        <p class="intro">Your everyday grooming, right here in Kawangware.</p>
+      </header>
+
+      <section class="price-list" aria-label="Barber services and prices">
+        <div class="service">
+          <span class="service-name">Classic haircut</span>
+          <span class="service-price">KSh 300</span>
+        </div>
+        <div class="service">
+          <span class="service-name">Skin fade</span>
+          <span class="service-price">KSh 400</span>
+        </div>
+        <div class="service">
+          <span class="service-name">Haircut + beard</span>
+          <span class="service-price">KSh 500</span>
+        </div>
+        <div class="service">
+          <span class="service-name">Beard trim + line-up</span>
+          <span class="service-price">KSh 200</span>
+        </div>
+        <div class="service">
+          <span class="service-name">Kids' haircut</span>
+          <span class="service-price">KSh 250</span>
+        </div>
+      </section>
+
+      <div class="details">
+        <div class="notice">Special styles may cost more. Ask for the price before we start.</div>
+
+        <a class="share-button" id="share-button" href="https://wa.me/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 11.6a8 8 0 0 1-11.8 7l-4.2 1.2 1.2-4A8 8 0 1 1 20 11.6Z"></path>
+            <path d="M9 8.5c.2 3 2.4 5.2 5.4 5.5M9 8.5l1.3-.4 1 2-1 .8M14.4 14l.3-1.2 2.1.8-.1 1.3"></path>
+          </svg>
+          Send price list on WhatsApp
+        </a>
+        <p class="location">Kawangware, Nairobi</p>
+      </div>
+    </article>
+  </main>
+
+  <script>
+    (() => {
+      const shareButton = document.querySelector("#share-button");
+      const services = [...document.querySelectorAll(".service")];
+
+      const buildShareText = () => {
+        const priceLines = services.map((service) => {
+          const name = service.querySelector(".service-name").textContent.trim();
+          const price = service.querySelector(".service-price").textContent.trim();
+          return `${name} - ${price}`;
+        });
+
+        return [
+          "KAWANGWARE BARBER",
+          "PRICE LIST",
+          "",
+          ...priceLines,
+          "",
+          "Special styles may cost more. Ask for the price before we start.",
+          "Kawangware, Nairobi"
+        ].join("\n");
+      };
+
+      const shareText = buildShareText();
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+      shareButton.href = whatsappUrl;
+
+      shareButton.addEventListener("click", async (event) => {
+        if (!navigator.share) return;
+
+        event.preventDefault();
+        try {
+          await navigator.share({
+            title: "Kawangware Barber price list",
+            text: shareText
+          });
+        } catch (error) {
+          if (error.name !== "AbortError") window.location.href = whatsappUrl;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
