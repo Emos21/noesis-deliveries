@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Njeri Tailoring, Opening Hours, Door Card</title>
+<meta name="description" content="Printable A4 door card showing the opening hours of Njeri Tailoring in Kawangware, Nairobi.">
+<meta name="theme-color" content="#FBF8F3">
+<style>
+  :root{
+    --paper:#FBF8F3;
+    --card:#FFFFFF;
+    --ink:#1F2A44;
+    --ink-soft:#5B6478;
+    --accent:#B36A22;
+    --accent-soft:#F3E7D8;
+    --line:#D8CFC1;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+
+  html{-webkit-text-size-adjust:100%}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.4;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .hint{
+    max-width:44rem;
+    margin:0 auto;
+    padding:1rem;
+    font-size:.9rem;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+
+  .hint b{color:var(--ink)}
+
+  .sheet{
+    max-width:44rem;
+    margin:0 auto 3rem;
+    padding:0 1rem;
+  }
+
+  .card{
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:1.75rem 1.35rem 1.5rem;
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+  }
+
+  .frame{
+    border:1px solid var(--line);
+    padding:1.5rem 1.15rem;
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+    flex:1;
+  }
+
+  header{text-align:center}
+
+  .eyebrow{
+    margin:0 0 .6rem;
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+
+  h1{
+    margin:0;
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    font-size:clamp(2rem,9vw,3rem);
+    font-weight:600;
+    line-height:1.05;
+    letter-spacing:-.01em;
+  }
+
+  .trade{
+    margin:.55rem 0 0;
+    font-size:.86rem;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  .rule{
+    height:0;
+    border-top:1px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding-top:3px;
+    margin:0;
+  }
+
+  .banner{
+    margin:0;
+    text-align:center;
+    font-size:clamp(1.5rem,7vw,2.1rem);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    font-weight:600;
+    letter-spacing:.02em;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+  }
+
+  th{
+    text-align:left;
+    font-size:.7rem;
+    font-weight:700;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    padding:0 0 .5rem;
+    border-bottom:1px solid var(--line);
+  }
+
+  th:last-child{text-align:right}
+
+  td{
+    padding:.7rem 0;
+    border-bottom:1px dotted var(--line);
+    font-size:clamp(1.05rem,4.4vw,1.3rem);
+    vertical-align:baseline;
+  }
+
+  td.day{font-weight:600}
+
+  td.time{
+    text-align:right;
+    white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+  }
+
+  tr:last-child td{border-bottom:0}
+
+  tr.shut td{color:var(--ink-soft)}
+
+  tr.shut td.time{
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    font-size:clamp(.95rem,3.6vw,1.1rem);
+  }
+
+  .closing{
+    margin:0;
+    padding:.9rem 1rem;
+    background:var(--accent-soft);
+    border-left:3px solid var(--accent);
+    color:#6E3E10;
+    font-size:.92rem;
+  }
+
+  footer{
+    margin-top:auto;
+    text-align:center;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+
+  footer .where{
+    display:block;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink);
+    margin-bottom:.25rem;
+  }
+
+  @media (min-width:768px){
+    .card{padding:2.25rem}
+    .frame{padding:2.25rem 2rem}
+    td{padding:.85rem 0}
+  }
+
+  @page{
+    size:A4 portrait;
+    margin:14mm;
+  }
+
+  @media print{
+    html,body{background:#fff}
+    .hint{display:none}
+    .sheet{max-width:none;margin:0;padding:0}
+    .card{
+      min-height:245mm;
+      border-width:2pt;
+      padding:10mm 8mm;
+      page-break-inside:avoid;
+    }
+    .frame{padding:9mm 7mm}
+    h1{font-size:34pt}
+    .banner{font-size:22pt}
+    td{font-size:14pt}
+    tr.shut td.time{font-size:12pt}
+    .closing{
+      background:#fff;
+      border-left:2pt solid var(--ink);
+      color:var(--ink);
+      font-size:10pt;
+    }
+    .eyebrow,th{color:var(--ink)}
+  }
+</style>
+</head>
+<body>
+  <p class="hint">
+    This page is made to print on one sheet of A4.
+    Open it on a computer or phone and choose <b>Print</b>, then cut along the outer black line and stick it on the door.
+  </p>
+
+  <div class="sheet">
+    <article class="card">
+      <div class="frame">
+        <header>
+          <p class="eyebrow">Kawangware, Nairobi</p>
+          <h1>Njeri Tailoring</h1>
+          <p class="trade">Tailoring, alterations and repairs</p>
+        </header>
+
+        <hr class="rule">
+
+        <p class="banner">Opening Hours</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">We are open</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="day">Monday</td><td class="time">8:00am to 6:30pm</td></tr>
+            <tr><td class="day">Tuesday</td><td class="time">8:00am to 6:30pm</td></tr>
+            <tr><td class="day">Wednesday</td><td class="time">8:00am to 6:30pm</td></tr>
+            <tr><td class="day">Thursday</td><td class="time">8:00am to 6:30pm</td></tr>
+            <tr><td class="day">Friday</td><td class="time">8:00am to 6:30pm</td></tr>
+            <tr><td class="day">Saturday</td><td class="time">8:00am to 6:00pm</td></tr>
+            <tr class="shut"><td class="day">Sunday</td><td class="time">Closed</td></tr>
+            <tr class="shut"><td class="day">Public holidays</td><td class="time">Closed</td></tr>
+          </tbody>
+        </table>
+
+        <p class="closing">Last orders and collections are taken 30 minutes before we close.</p>
+
+        <!--
+          TO ADD YOUR PHONE OR WHATSAPP NUMBER:
+          in the footer below, add it after "Kawangware, Nairobi" so the line
+          reads like this, with your own number in place of 0712 345 678:
+
+          Kawangware, Nairobi. Call or WhatsApp 0712 345 678
+        -->
+        <footer>
+          <span class="where">Find us</span>
+          Kawangware, Nairobi
+        </footer>
+      </div>
+    </article>
+  </div>
+</body>
+</html>
