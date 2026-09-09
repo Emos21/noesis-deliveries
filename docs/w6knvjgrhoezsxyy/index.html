@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Njeri Tailoring Opening Hours</title>
+<meta name="description" content="A printable one-page A4 opening-hours card for Njeri Tailoring in Kawangware, Nairobi.">
+<style>
+  :root {
+    --paper: #fffdf8;
+    --ink: #2f1836;
+    --muted: #67596a;
+    --accent: #b8563f;
+    --accent-pale: #f5e5dc;
+    --line: #d9c8bd;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: #eee9e2;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.3;
+  }
+
+  .print-note {
+    width: min(210mm, 100%);
+    margin: 0 auto;
+    padding: 12px 18px;
+    color: #473e49;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .page {
+    width: min(210mm, 100%);
+    min-height: 297mm;
+    margin: 0 auto 28px;
+    padding: 14mm;
+    background: var(--paper);
+  }
+
+  .card {
+    position: relative;
+    min-height: 269mm;
+    padding: 13mm 14mm 11mm;
+    overflow: hidden;
+    border: 2.2mm solid var(--ink);
+    outline: 0.35mm solid var(--line);
+    outline-offset: -5mm;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stitch {
+    height: 2mm;
+    margin: 2mm 0 9mm;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--accent) 0 9mm,
+      transparent 9mm 13mm
+    );
+  }
+
+  header {
+    text-align: center;
+  }
+
+  .place {
+    margin: 0 0 4mm;
+    color: var(--accent);
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 33pt;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .services {
+    margin: 4mm 0 0;
+    color: var(--muted);
+    font-size: 10.5pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hours-title {
+    margin: 10mm 0 7mm;
+    display: flex;
+    align-items: center;
+    gap: 5mm;
+    color: var(--accent);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25pt;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .hours-title::before,
+  .hours-title::after {
+    content: "";
+    height: 0.5mm;
+    flex: 1;
+    background: var(--accent);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14pt;
+    font-variant-numeric: tabular-nums;
+  }
+
+  th {
+    padding: 0 0 3mm;
+    color: var(--muted);
+    border-bottom: 0.6mm solid var(--ink);
+    font-size: 9pt;
+    letter-spacing: 0.18em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  th:last-child {
+    text-align: right;
+  }
+
+  td {
+    padding: 4.2mm 0;
+    border-bottom: 0.35mm solid var(--line);
+  }
+
+  td:first-child {
+    font-weight: 700;
+  }
+
+  td:last-child {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  tr.closed td {
+    color: var(--muted);
+  }
+
+  tr.closed td:last-child {
+    color: var(--accent);
+    font-size: 12pt;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .welcome {
+    margin: 9mm 0 0;
+    padding: 5mm 6mm;
+    background: var(--accent-pale);
+    border-left: 1.5mm solid var(--accent);
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14pt;
+    font-style: italic;
+    text-align: center;
+  }
+
+  footer {
+    margin-top: auto;
+    padding-top: 8mm;
+    text-align: center;
+  }
+
+  .find-us {
+    margin: 0 0 1.5mm;
+    color: var(--accent);
+    font-size: 9pt;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .location {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15pt;
+    font-weight: 700;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  @media print {
+    html,
+    body {
+      width: 210mm;
+      height: 297mm;
+      background: #fff;
+    }
+
+    .print-note {
+      display: none;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      min-height: 0;
+      margin: 0;
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+
+    .card {
+      height: 269mm;
+      min-height: 0;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .place,
+    .hours-title,
+    .find-us,
+    tr.closed td:last-child {
+      color: var(--ink);
+    }
+
+    .welcome {
+      background: #fff;
+      border: 0.5mm solid var(--ink);
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .page {
+      min-height: auto;
+      padding: 14px;
+    }
+
+    .card {
+      min-height: calc(100vh - 80px);
+      padding: 34px 26px 28px;
+      outline-offset: -14px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 11vw, 48px);
+    }
+
+    .hours-title {
+      font-size: clamp(26px, 8vw, 36px);
+    }
+
+    table {
+      font-size: clamp(15px, 4.5vw, 20px);
+    }
+
+    td {
+      padding: 12px 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <p class="print-note">Ready to print on one A4 sheet. In the print window, choose A4, portrait, actual size, and turn off headers and footers.</p>
+
+  <main class="page">
+    <article class="card" aria-label="Njeri Tailoring opening hours">
+      <div class="stitch" aria-hidden="true"></div>
+
+      <header>
+        <p class="place">Kawangware, Nairobi</p>
+        <h1>Njeri Tailoring</h1>
+        <p class="services">Tailoring, alterations and repairs</p>
+      </header>
+
+      <h2 class="hours-title">Opening Hours</h2>
+
+      <table aria-label="Weekly opening hours">
+        <thead>
+          <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Monday</td><td>8:00am to 6:30pm</td></tr>
+          <tr><td>Tuesday</td><td>8:00am to 6:30pm</td></tr>
+          <tr><td>Wednesday</td><td>8:00am to 6:30pm</td></tr>
+          <tr><td>Thursday</td><td>8:00am to 6:30pm</td></tr>
+          <tr><td>Friday</td><td>8:00am to 6:30pm</td></tr>
+          <tr><td>Saturday</td><td>8:00am to 6:00pm</td></tr>
+          <tr class="closed"><td>Sunday</td><td>Closed</td></tr>
+          <tr class="closed"><td>Public holidays</td><td>Closed</td></tr>
+        </tbody>
+      </table>
+
+      <p class="welcome">Thank you for supporting a local tailor.</p>
+
+      <footer>
+        <p class="find-us">Find us in</p>
+        <p class="location">Kawangware, Nairobi</p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
