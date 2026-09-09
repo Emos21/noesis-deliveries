@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mumbi Salon, Opening Hours</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  :root {
+    --paper: #ffffff;
+    --ink: #1b1714;
+    --muted: #8a8079;
+    --accent: #8c6239;
+    --hairline: #ddd5cc;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Liberation Serif", "DejaVu Serif", "Nimbus Roman", Georgia, "Times New Roman", serif;
+  }
+
+  .sheet {
+    width: 210mm;
+    height: 297mm;
+    padding: 14mm;
+    background: var(--paper);
+  }
+
+  .frame {
+    height: 100%;
+    border: 0.5pt solid var(--accent);
+    padding: 3mm;
+  }
+
+  .inner {
+    height: 100%;
+    border: 0.5pt solid var(--hairline);
+    padding: 16mm 16mm 13mm 16mm;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Masthead */
+  .masthead {
+    text-align: center;
+  }
+
+  .salon {
+    font-family: "Liberation Sans", "DejaVu Sans", "Nimbus Sans", Helvetica, Arial, sans-serif;
+    font-size: 12pt;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-indent: 0.42em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .mark {
+    margin: 7mm auto 8mm auto;
+    width: 34mm;
+    border-top: 0.5pt solid var(--accent);
+    position: relative;
+  }
+
+  .mark span {
+    position: absolute;
+    top: -2.1mm;
+    left: 50%;
+    margin-left: -2mm;
+    width: 4mm;
+    height: 4mm;
+    background: var(--paper);
+    border: 0.5pt solid var(--accent);
+    transform: rotate(45deg);
+  }
+
+  .title {
+    font-size: 40pt;
+    line-height: 1.06;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 0.005em;
+  }
+
+  .kicker {
+    font-family: "Liberation Sans", "DejaVu Sans", "Nimbus Sans", Helvetica, Arial, sans-serif;
+    font-size: 8.5pt;
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 6mm 0 0 0;
+  }
+
+  /* Hours table */
+  .hours {
+    margin-top: 14mm;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .hours td {
+    padding: 4.6mm 0;
+    border-bottom: 0.5pt solid var(--hairline);
+    vertical-align: baseline;
+  }
+
+  .hours tr:first-child td {
+    border-top: 0.5pt solid var(--hairline);
+  }
+
+  .day {
+    font-family: "Liberation Sans", "DejaVu Sans", "Nimbus Sans", Helvetica, Arial, sans-serif;
+    font-size: 11pt;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .time {
+    text-align: right;
+    font-size: 16pt;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  tr.rest .day { color: var(--muted); }
+
+  tr.rest .time {
+    font-family: "Liberation Sans", "DejaVu Sans", "Nimbus Sans", Helvetica, Arial, sans-serif;
+    font-size: 10.5pt;
+    letter-spacing: 0.26em;
+    text-indent: 0.26em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Foot */
+  .spacer { flex: 1 1 auto; }
+
+  .foot {
+    text-align: center;
+  }
+
+  .foot-rule {
+    width: 18mm;
+    margin: 0 auto 6mm auto;
+    border-top: 0.5pt solid var(--accent);
+  }
+
+  .foot p {
+    font-family: "Liberation Sans", "DejaVu Sans", "Nimbus Sans", Helvetica, Arial, sans-serif;
+    font-size: 8.5pt;
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="frame">
+      <div class="inner">
+
+        <div class="masthead">
+          <p class="salon">Mumbi Salon</p>
+          <div class="mark"><span></span></div>
+          <h1 class="title">Opening Hours</h1>
+          <p class="kicker">We look forward to seeing you</p>
+        </div>
+
+        <table class="hours">
+          <tr>
+            <td class="day">Monday</td>
+            <td class="time">9.00 am to 7.00 pm</td>
+          </tr>
+          <tr>
+            <td class="day">Tuesday</td>
+            <td class="time">9.00 am to 7.00 pm</td>
+          </tr>
+          <tr>
+            <td class="day">Wednesday</td>
+            <td class="time">9.00 am to 7.00 pm</td>
+          </tr>
+          <tr>
+            <td class="day">Thursday</td>
+            <td class="time">9.00 am to 7.00 pm</td>
+          </tr>
+          <tr>
+            <td class="day">Friday</td>
+            <td class="time">9.00 am to 7.00 pm</td>
+          </tr>
+          <tr>
+            <td class="day">Saturday</td>
+            <td class="time">9.00 am to 5.00 pm</td>
+          </tr>
+          <tr class="rest">
+            <td class="day">Sunday</td>
+            <td class="time">Closed</td>
+          </tr>
+        </table>
+
+        <div class="spacer"></div>
+
+        <div class="foot">
+          <div class="foot-rule"></div>
+          <p>Mumbi Salon</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
