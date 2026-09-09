@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#faf8f5">
+<meta name="robots" content="noindex, nofollow">
+<title>Repair price list</title>
+
+<style>
+  :root{
+    --paper:#faf8f5;
+    --card:#ffffff;
+    --ink:#16130f;
+    --muted:#6b625a;
+    --line:#e6dfd5;
+    --accent:#c2410c;
+    --good:#15803d;
+    --scale:1;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:calc(16px * var(--scale));
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px 40px}
+
+  /* ---------- header ---------- */
+  header{padding:22px 0 14px}
+  .shop{
+    margin:0;
+    font-size:1.6em;
+    line-height:1.15;
+    font-weight:800;
+    letter-spacing:-0.02em;
+  }
+  .tag{margin:6px 0 0;color:var(--muted);font-size:0.9em}
+  .contact{
+    margin:14px 0 0;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 18px;
+    font-size:0.95em;
+    font-weight:600;
+  }
+  .contact a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(194,65,12,.35)}
+  .promise{
+    margin:16px 0 0;
+    padding:0;
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .promise li{
+    font-size:0.8em;
+    font-weight:700;
+    letter-spacing:.02em;
+    color:var(--good);
+    background:#eef7f0;
+    border:1px solid #cfe7d6;
+    border-radius:999px;
+    padding:5px 11px;
+  }
+
+  /* ---------- sticky controls ---------- */
+  .bar{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    padding:10px 0 8px;
+  }
+  .bar-row{display:flex;gap:8px;align-items:center}
+  #find{
+    flex:1 1 auto;
+    min-width:0;
+    font:inherit;
+    font-size:1em; /* 16px minimum keeps phones from zooming in */
+    color:var(--ink);
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:11px 12px;
+  }
+  #find::placeholder{color:#9c948c}
+  #big{
+    flex:0 0 auto;
+    font:inherit;
+    font-size:0.85em;
+    font-weight:700;
+    color:var(--ink);
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:11px 13px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  #big[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  #find:focus-visible,#big:focus-visible,.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .chips{
+    display:flex;
+    gap:7px;
+    margin-top:8px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .chips::-webkit-scrollbar{display:none}
+  .chip{
+    flex:0 0 auto;
+    font:inherit;
+    font-size:0.8em;
+    font-weight:700;
+    color:var(--muted);
+    background:transparent;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:6px 12px;
+    cursor:pointer;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+
+  /* ---------- price sections ---------- */
+  section{margin-top:26px;scroll-margin-top:110px}
+  section h2{
+    margin:0 0 2px;
+    font-size:0.78em;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.09em;
+    color:var(--accent);
+  }
+  .rule{height:2px;background:var(--ink);margin:0 0 4px}
+  .item{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:14px;
+    padding:11px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .item-name{font-weight:600}
+  .item-note{display:block;margin-top:2px;font-size:0.82em;font-weight:400;color:var(--muted)}
+  .price{
+    flex:0 0 auto;
+    text-align:right;
+    font-weight:800;
+    font-size:1.05em;
+    font-variant-numeric:tabular-nums;
+    white-space:nowrap;
+  }
+  .from{
+    display:block;
+    font-size:0.62em;
+    font-weight:700;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .free{color:var(--good)}
+
+  /* ---------- footer ---------- */
+  .note{
+    margin-top:28px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:8px;
+    padding:14px 15px;
+  }
+  .note h2{
+    margin:0 0 8px;
+    font-size:0.78em;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.09em;
+    color:var(--accent);
+  }
+  .note ul{margin:0;padding-left:18px}
+  .note li{margin-bottom:6px;font-size:0.92em}
+  .note li:last-child{margin-bottom:0}
+  .updated{margin-top:18px;font-size:0.8em;color:var(--muted);text-align:center}
+  .empty{padding:26px 0;color:var(--muted);font-size:0.95em}
+  noscript p{
+    margin:18px 0 0;
+    padding:14px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:var(--card);
+    font-size:0.92em;
+  }
+
+  @media (min-width:768px){
+    .wrap{padding:0 24px 56px}
+    .shop{font-size:2em}
+  }
+
+  @media print{
+    :root{--scale:1}
+    body{background:#fff;font-size:10pt}
+    .bar,.promise,#big{display:none !important}
+    .wrap{max-width:none;padding:0}
+    #list{columns:2;column-gap:26px}
+    section{break-inside:avoid;margin-top:14px}
+    .note{break-inside:avoid}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto !important;transition:none !important;animation:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <!-- CHANGE THESE FOUR LINES: shop name, what you do, where you are, your number -->
+    <h1 class="shop" id="shopName">Mwangi Phone Repair</h1>
+    <p class="tag" id="shopTag">Phone repair and servicing, Ngara, Nairobi</p>
+    <div class="contact">
+      <span id="shopPlace">Ngara, Nairobi</span>
+      <a id="shopPhoneLink" href="tel:+254700000000"><span id="shopPhone">0700 000 000</span></a>
+      <span id="shopPay">M-Pesa or cash</span>
+    </div>
+    <ul class="promise">
+      <li>Free check</li>
+      <li>Most repairs same day</li>
+      <li>30 day parts warranty</li>
+    </ul>
+  </header>
+
+  <div class="bar">
+    <div class="bar-row">
+      <label for="find" class="sr-only" style="position:absolute;left:-9999px">Search a repair</label>
+      <input id="find" type="search" inputmode="search" placeholder="Search: battery, screen, charging..." autocomplete="off">
+      <button id="big" type="button" aria-pressed="false">Bigger text</button>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <main id="list"></main>
+
+  <noscript>
+    <p>This page needs JavaScript switched on in your browser to show the prices.
+    In Chrome open Settings, then Site settings, then JavaScript, and allow it.</p>
+  </noscript>
+
+  <div class="note">
+    <h2>Please read</h2>
+    <ul>
+      <li>Checking your phone is free. You only pay after we agree on the price.</li>
+      <li>Prices here are a guide. The exact price depends on your phone model and what is broken. We tell you the final price before we start.</li>
+      <li>Parts carry a 30 day warranty. Water damage and cracked screens after repair are not covered.</li>
+      <li>Please back up your photos and contacts first. We are careful, but repairs can wipe a phone.</li>
+      <li>Phones left more than 30 days after repair may be sold to cover the bill.</li>
+    </ul>
+  </div>
+
+  <p class="updated">Prices updated <span id="updated">September 2026</span></p>
+</div>
+
+<script>
+/* =====================================================================
+   YOUR PRICES. THIS IS THE ONLY PART YOU NEED TO CHANGE.
+
+   Every line looks like this:
+
+       ["What you fix", "1,500", "small note, or leave the quotes empty"],
+
+   - Put "from 1,500" instead of "1,500" when the price changes by model.
+   - Put "Free" for anything free.
+   - Keep the square brackets, the quote marks and the comma at the end.
+   - To remove a line, delete the whole line.
+   - To add a line, copy a line above it and change the words.
+   ===================================================================== */
+
+var PRICES = [
+
+  ["Screens and glass", [
+    ["Screen replacement, Tecno, Infinix, itel", "from 2,500", "basic and mid models"],
+    ["Screen replacement, Samsung A series", "from 4,500", "original quality panel"],
+    ["Screen replacement, Redmi, Poco, Realme", "from 4,000", ""],
+    ["Screen replacement, iPhone 7 to 11", "from 6,500", "aftermarket panel"],
+    ["Screen replacement, iPhone 12 and newer", "from 12,000", "ask for a quote by model"],
+    ["Touch glass only, no LCD damage", "from 1,800", "where the phone allows it"],
+    ["Back cover or back glass", "from 1,500", ""],
+    ["Camera lens glass", "800", ""],
+    ["Screen protector fitted", "300", "tempered glass, fitted free with a new screen"]
+  ]],
+
+  ["Battery and charging", [
+    ["Battery replacement, Tecno, Infinix, itel", "from 1,200", ""],
+    ["Battery replacement, Samsung, Redmi, Realme", "from 1,800", ""],
+    ["Battery replacement, iPhone", "from 2,500", "ask by model"],
+    ["Charging port replacement", "from 1,000", "most Android phones"],
+    ["Charging port cleaning", "300", "often all a slow charger needs"],
+    ["Charging fault check and repair", "from 800", "cable, port or board tested first"]
+  ]],
+
+  ["Sound, camera and buttons", [
+    ["Earpiece or ear speaker", "from 800", ""],
+    ["Loudspeaker", "from 800", ""],
+    ["Microphone", "from 900", "when they cannot hear you"],
+    ["Rear camera", "from 1,500", ""],
+    ["Front camera", "from 1,200", ""],
+    ["Power or volume button", "from 700", ""],
+    ["Fingerprint sensor", "from 1,500", "not possible on some iPhones"],
+    ["SIM tray or SIM reader", "from 700", ""]
+  ]],
+
+  ["Software and data", [
+    ["Software reflash, phone will not boot", "from 1,000", ""],
+    ["Slow phone cleanup and tune up", "500", "junk apps and storage cleared"],
+    ["Virus and unwanted app removal", "600", ""],
+    ["Google or Apple account setup", "300", ""],
+    ["Data transfer to a new phone", "500", "contacts, photos, WhatsApp"],
+    ["Data recovery from a dead phone", "from 1,500", "not always possible, checked first"],
+    ["Screen lock reset", "from 1,000", "receipt or proof of ownership needed"]
+  ]],
+
+  ["Water damage and cleaning", [
+    ["Water damage clean and test", "from 1,500", "bring it in fast, do not charge it"],
+    ["Full board clean, phone dead after water", "from 2,500", "quoted after the check"],
+    ["Deep clean, ports and speakers", "500", ""]
+  ]],
+
+  ["Board level repair", [
+    ["Board fault diagnosis", "Free", "you pay only if we can fix it"],
+    ["No power or short circuit repair", "from 2,000", ""],
+    ["No network or no signal repair", "from 2,000", ""],
+    ["Backlight repair, screen dark but working", "from 1,500", ""]
+  ]],
+
+  ["Accessories", [
+    ["Charger, original quality", "from 700", ""],
+    ["USB cable", "from 250", ""],
+    ["Earphones", "from 400", ""],
+    ["Phone case", "from 300", ""],
+    ["Power bank", "from 1,200", ""]
+  ]],
+
+  ["Other services", [
+    ["Phone check before you buy secondhand", "300", "we test it with you"],
+    ["Trade in valuation", "Free", "bring the phone in"],
+    ["Unlocking a network locked phone", "from 1,500", "only with proof it is yours"]
+  ]]
+
+];
+
+/* ---------------------------------------------------------------------
+   Below here is the page machinery. You do not need to change it.
+   --------------------------------------------------------------------- */
+(function () {
+  var list = document.getElementById('list');
+  var chips = document.getElementById('chips');
+  var find = document.getElementById('find');
+  var big = document.getElementById('big');
+
+  function slug(s) {
+    return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+
+  function priceMarkup(raw) {
+    var value = String(raw).trim();
+    var prefix = '';
+    if (/^from\s+/i.test(value)) {
+      prefix = '<span class="from">from</span>';
+      value = value.replace(/^from\s+/i, '');
+    }
+    if (/^free$/i.test(value)) {
+      return prefix + '<span class="free">Free</span>';
+    }
+    return prefix + 'KSh ' + value;
+  }
+
+  PRICES.forEach(function (group) {
+    var title = group[0];
+    var rows = group[1] || [];
+    var id = 'g-' + slug(title);
+
+    var section = document.createElement('section');
+    section.id = id;
+
+    var h2 = document.createElement('h2');
+    h2.textContent = title;
+    section.appendChild(h2);
+
+    var rule = document.createElement('div');
+    rule.className = 'rule';
+    section.appendChild(rule);
+
+    rows.forEach(function (row) {
+      var name = row[0] || '';
+      var price = row[1] || '';
+      var note = row[2] || '';
+
+      var item = document.createElement('div');
+      item.className = 'item';
+      item.setAttribute('data-search', (name + ' ' + note + ' ' + title).toLowerCase());
+
+      var left = document.createElement('div');
+      left.className = 'item-name';
+      left.appendChild(document.createTextNode(name));
+      if (note) {
+        var small = document.createElement('span');
+        small.className = 'item-note';
+        small.textContent = note;
+        left.appendChild(small);
+      }
+
+      var right = document.createElement('div');
+      right.className = 'price';
+      right.innerHTML = priceMarkup(price);
+
+      item.appendChild(left);
+      item.appendChild(right);
+      section.appendChild(item);
+    });
+
+    list.appendChild(section);
+
+    var chip = document.createElement('a');
+    chip.className = 'chip';
+    chip.href = '#' + id;
+    chip.textContent = title;
+    chips.appendChild(chip);
+  });
+
+  var empty = document.createElement('p');
+  empty.className = 'empty';
+  empty.hidden = true;
+  empty.textContent = 'Nothing matches that. Try one word, like battery or screen.';
+  list.appendChild(empty);
+
+  find.addEventListener('input', function () {
+    var q = find.value.trim().toLowerCase();
+    var shown = 0;
+
+    Array.prototype.forEach.call(list.querySelectorAll('section'), function (section) {
+      var visible = 0;
+      Array.prototype.forEach.call(section.querySelectorAll('.item'), function (item) {
+        var hit = !q || item.getAttribute('data-search').indexOf(q) !== -1;
+        item.hidden = !hit;
+        if (hit) { visible++; }
+      });
+      section.hidden = visible === 0;
+      shown += visible;
+    });
+
+    empty.hidden = shown !== 0;
+    chips.hidden = q.length > 0;
+  });
+
+  function setBig(on) {
+    document.documentElement.style.setProperty('--scale', on ? '1.18' : '1');
+    big.setAttribute('aria-pressed', on ? 'true' : 'false');
+    big.textContent = on ? 'Normal text' : 'Bigger text';
+    try { localStorage.setItem('bigText', on ? '1' : '0'); } catch (e) {}
+  }
+
+  big.addEventListener('click', function () {
+    setBig(big.getAttribute('aria-pressed') !== 'true');
+  });
+
+  try {
+    if (localStorage.getItem('bigText') === '1') { setBig(true); }
+  } catch (e) {}
+}());
+</script>
+</body>
+</html>
