@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School Uniform Tailoring in Kariobangi</title>
+<meta name="description" content="School uniforms sewn to measure in Kariobangi, Nairobi. Shirts, blouses, shorts, trousers, skirts, tunics, games kit, repairs and name labels.">
+<style>
+  :root{
+    --paper:#fbf9f5;
+    --card:#ffffff;
+    --ink:#1a2333;
+    --ink-soft:#4b566b;
+    --line:#e3ded4;
+    --navy:#1f3a63;
+    --navy-deep:#16294a;
+    --thread:#b7452f;
+    --thread-soft:#fdf0ec;
+    --radius:14px;
+  }
+
+  *{box-sizing:border-box}
+
+  html{-webkit-text-size-adjust:100%}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:17px;
+    line-height:1.55;
+  }
+
+  .sheet{
+    max-width:960px;
+    margin:0 auto;
+    padding:20px 18px 48px;
+  }
+
+  /* ---------- header ---------- */
+
+  .masthead{
+    background:var(--navy);
+    color:#fff;
+    border-radius:var(--radius);
+    padding:28px 22px;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .masthead::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:6px;
+    background:repeating-linear-gradient(90deg,var(--thread) 0 14px,transparent 14px 26px);
+  }
+
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:#c9d6ea;
+    margin:0 0 10px;
+  }
+
+  h1{
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:700;
+    font-size:34px;
+    line-height:1.12;
+    margin:0 0 12px;
+  }
+
+  .promise{
+    margin:0;
+    font-size:18px;
+    color:#e7eefa;
+    max-width:34ch;
+  }
+
+  .where{
+    margin:18px 0 0;
+    padding-top:16px;
+    border-top:1px solid rgba(255,255,255,.22);
+    font-size:15px;
+    color:#cddaee;
+  }
+
+  .where strong{color:#fff;font-weight:600}
+
+  /* ---------- shared blocks ---------- */
+
+  section{margin-top:26px}
+
+  h2{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:22px;
+    margin:0 0 14px;
+    color:var(--navy-deep);
+  }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
+  }
+
+  /* ---------- what we sew ---------- */
+
+  .sew{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    gap:10px 20px;
+    grid-template-columns:1fr;
+  }
+
+  .sew li{
+    padding-left:18px;
+    position:relative;
+    color:var(--ink-soft);
+  }
+
+  .sew li::before{
+    content:"";
+    position:absolute;
+    left:0; top:.62em;
+    width:7px; height:7px;
+    background:var(--thread);
+    border-radius:50%;
+  }
+
+  .sew b{color:var(--ink);font-weight:600}
+
+  /* ---------- steps ---------- */
+
+  .steps{
+    counter-reset:step;
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    gap:14px;
+    grid-template-columns:1fr;
+  }
+
+  .steps li{
+    counter-increment:step;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 18px 18px 58px;
+    position:relative;
+  }
+
+  .steps li::before{
+    content:counter(step);
+    position:absolute;
+    left:18px; top:17px;
+    width:26px; height:26px;
+    background:var(--thread-soft);
+    color:var(--thread);
+    border:1px solid #f0cdc3;
+    border-radius:50%;
+    font-size:14px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .steps h3{
+    margin:0 0 4px;
+    font-size:16px;
+  }
+
+  .steps p{
+    margin:0;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- prices ---------- */
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:16px;
+  }
+
+  caption{
+    text-align:left;
+    font-size:14px;
+    color:var(--ink-soft);
+    padding-bottom:10px;
+  }
+
+  th,td{
+    text-align:left;
+    padding:11px 8px;
+    border-bottom:1px solid var(--line);
+  }
+
+  th{
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+
+  td:last-child,th:last-child{text-align:right;white-space:nowrap}
+
+  tr:last-child td{border-bottom:0}
+
+  /* the yellow fill-in-your-details marks; readable on light and dark blocks */
+  .fill{
+    background:#fff8e6;
+    color:#4a3a12;
+    border-bottom:1px dashed #d9b972;
+    padding:1px 4px;
+    border-radius:3px;
+  }
+
+  .note{
+    margin:14px 0 0;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- reasons ---------- */
+
+  .reasons{
+    display:grid;
+    gap:14px;
+    grid-template-columns:1fr;
+  }
+
+  .reason{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:3px solid var(--navy);
+    border-radius:10px;
+    padding:16px 16px 16px 18px;
+  }
+
+  .reason h3{margin:0 0 4px;font-size:16px}
+  .reason p{margin:0;font-size:15px;color:var(--ink-soft)}
+
+  /* ---------- contact ---------- */
+
+  .contact{
+    background:var(--navy-deep);
+    color:#fff;
+    border-radius:var(--radius);
+    padding:26px 22px;
+  }
+
+  .contact h2{color:#fff;margin-bottom:6px}
+
+  .contact p.lead{
+    margin:0 0 20px;
+    color:#c9d6ea;
+    font-size:16px;
+  }
+
+  .actions{
+    display:grid;
+    gap:12px;
+    grid-template-columns:1fr;
+  }
+
+  .btn{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    font-weight:600;
+    font-size:17px;
+    padding:15px 18px;
+    border-radius:10px;
+    border:1px solid transparent;
+  }
+
+  .btn-main{background:#fff;color:var(--navy-deep)}
+  .btn-ghost{border-color:rgba(255,255,255,.45);color:#fff}
+
+  .btn:hover{opacity:.9}
+
+  .btn:focus-visible,
+  a:focus-visible{
+    outline:3px solid #ffd36b;
+    outline-offset:2px;
+  }
+
+  .hours{
+    margin:20px 0 0;
+    padding-top:16px;
+    border-top:1px solid rgba(255,255,255,.22);
+    font-size:15px;
+    color:#cddaee;
+  }
+
+  .hours > span{display:block}
+
+  footer{
+    margin-top:26px;
+    text-align:center;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- tablet and up ---------- */
+
+  @media (min-width:768px){
+    body{font-size:18px}
+    .sheet{padding:32px 28px 56px}
+    .masthead{padding:40px 34px}
+    h1{font-size:46px}
+    .promise{font-size:20px}
+    .sew{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:repeat(3,1fr)}
+    .reasons{grid-template-columns:repeat(3,1fr)}
+    .actions{grid-template-columns:1fr 1fr}
+    .contact{padding:34px}
+    .split{display:grid;gap:22px;grid-template-columns:1.1fr .9fr;align-items:start}
+    .split section{margin-top:0}
+  }
+
+  /* ---------- print as a real flyer ---------- */
+
+  @media print{
+    body{background:#fff;font-size:11pt}
+    .sheet{max-width:none;padding:0}
+    .masthead,.contact{
+      background:#fff;
+      color:#000;
+      border:1.5pt solid #000;
+      border-radius:0;
+    }
+    .masthead::after{display:none}
+    .eyebrow,.promise,.where,.contact p.lead,.hours{color:#333}
+    .where strong,.contact h2{color:#000}
+    .btn{border:1pt solid #000;color:#000;background:#fff}
+    section{margin-top:12pt}
+    .card,.steps li,.reason{border-color:#999}
+    .fill{background:none;border-bottom:0;color:inherit;padding:0}
+    footer{margin-top:12pt}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="masthead">
+    <p class="eyebrow">School uniform tailoring</p>
+    <h1><span class="fill">Your Shop Name</span></h1>
+    <p class="promise">Uniforms sewn to your child's own measurements, here in Kariobangi.</p>
+    <p class="where">
+      <strong>Where to find us:</strong> <span class="fill">Shop number and street</span>,
+      near <span class="fill">nearest landmark</span>, Kariobangi, Nairobi.
+      <br>
+      <strong>Call or WhatsApp:</strong> <span class="fill">07XX XXX XXX</span>
+    </p>
+  </header>
+
+  <div class="split">
+    <section aria-labelledby="sew-title">
+      <h2 id="sew-title">What we sew</h2>
+      <div class="card">
+        <ul class="sew">
+          <li><b>Shirts and blouses</b> in school colours</li>
+          <li><b>Shorts and trousers</b> for boys</li>
+          <li><b>Skirts, tunics and dresses</b> for girls</li>
+          <li><b>Games and PE kit</b></li>
+          <li><b>Aprons and lab coats</b></li>
+          <li><b>Name labels</b> sewn in, so nothing gets lost</li>
+          <li><b>Repairs</b>: zips, buttons, torn seams, patched knees</li>
+          <li><b>Let out and take in</b> as the child grows</li>
+        </ul>
+        <p class="note">One set or a whole class. We also sew for schools and children's homes.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="price-title">
+      <h2 id="price-title">Our prices</h2>
+      <div class="card">
+        <table>
+          <caption>Ask us for a quote if the school has a special pattern.</caption>
+          <thead>
+            <tr><th scope="col">Item</th><th scope="col">From</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Shirt or blouse</td><td>KSh <span class="fill">000</span></td></tr>
+            <tr><td>Shorts or trousers</td><td>KSh <span class="fill">000</span></td></tr>
+            <tr><td>Skirt or tunic</td><td>KSh <span class="fill">000</span></td></tr>
+            <tr><td>Full set</td><td>KSh <span class="fill">000</span></td></tr>
+            <tr><td>Repairs and alterations</td><td>KSh <span class="fill">000</span></td></tr>
+          </tbody>
+        </table>
+        <p class="note">Half deposit to start, the rest on collection. M-Pesa or cash.</p>
+      </div>
+    </section>
+  </div>
+
+  <section aria-labelledby="how-title">
+    <h2 id="how-title">How it works</h2>
+    <ol class="steps">
+      <li>
+        <h3>Tell us the school</h3>
+        <p>Bring the school's colour and pattern, or an old uniform we can copy.</p>
+      </li>
+      <li>
+        <h3>We measure the child</h3>
+        <p>Measuring is free. Away from Kariobangi? Send the age, height and chest on WhatsApp.</p>
+      </li>
+      <li>
+        <h3>Collect and fit</h3>
+        <p>One set ready in <span class="fill">2</span> days. Bulk orders in <span class="fill">one</span> week. Free adjustment if the fit is not right.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="why-title">
+    <h2 id="why-title">Why parents come back</h2>
+    <div class="reasons">
+      <div class="reason">
+        <h3>Made to fit</h3>
+        <p>No guessing from a size chart. We measure the child who will wear it.</p>
+      </div>
+      <div class="reason">
+        <h3>Sewn to last a year</h3>
+        <p>Double stitched seams and strong hems, because school is rough on clothes.</p>
+      </div>
+      <div class="reason">
+        <h3>Growing room built in</h3>
+        <p>Extra hem and seam left inside, so next term we let it out instead of you buying again.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">Order for this term</h2>
+    <p class="lead">Send the school name and your child's age. We will reply with the price and the day it will be ready.</p>
+    <div class="actions">
+      <a class="btn btn-main"
+         href="https://wa.me/2547XXXXXXXX?text=Hi%2C%20I%20saw%20your%20uniform%20page.%20My%20child%20is%20in%20%5Bschool%5D%2C%20age%20%5Bage%5D."
+         aria-label="Message the shop on WhatsApp">Message on WhatsApp</a>
+      <a class="btn btn-ghost" href="tel:+2547XXXXXXXX" aria-label="Call the shop">Call the shop</a>
+    </div>
+    <p class="hours">
+      <span><strong>Open:</strong> Monday to Saturday, <span class="fill">8am to 6pm</span></span>
+      <span><strong>Sunday:</strong> <span class="fill">closed</span></span>
+      <span><strong>Busy season:</strong> come early in January, May and September</span>
+    </p>
+  </section>
+
+  <footer>
+    <p><span class="fill">Your Shop Name</span>, Kariobangi, Nairobi. Uniforms, repairs and alterations.</p>
+  </footer>
+
+</div>
+</body>
+</html>
